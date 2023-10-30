@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+<main>
+<!--    this is where the packets will be displayed-->
+    <div id="packets">
+
+    </div>
+</main>
+<script>
+    const packetsUL = document.getElementById("packets");
+
+    const es = new EventSource("/packets");
+    es.onerror = (err) => {
+        console.log("onerror", err)
+    };
+
+    es.onmessage = (msg) => {
+        console.log("onmessage", msg)
+    };
+
+    es.onopen = (...args) => {
+        console.log("onopen", args)
+    };
+
+    es.addEventListener("packet-list-update", (event) => {
+        const parsedData = JSON.parse(event.data);
+
+        let details =  document.getElementById("packet:"+parsedData.data.id);
+        if(details === null) {
+            details = document.createElement("details")
+            details.setAttribute("id", "packet:"+parsedData.data.id)
+
+            let summary = document.createElement("summary")
+            summary.textContent = parsedData.data.name
+            details.prepend(summary)
+
+            packetsUL.prepend(details)
+        }
+
+        const newElem = document.createElement("p")
+        newElem.textContent = JSON.stringify(parsedData.data.struct)
+
+        details.prepend(newElem)
+    });
+</script>
+</body>
+</html>

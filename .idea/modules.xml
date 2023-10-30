@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../minecraft/.idea/minecraft.iml" filepath="$PROJECT_DIR$/../minecraft/.idea/minecraft.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/proxy-viewer.iml" filepath="$PROJECT_DIR$/.idea/proxy-viewer.iml" />
+    </modules>
+  </component>
+</project>
